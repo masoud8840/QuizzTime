@@ -9,34 +9,45 @@
     <input type="text" name="name" id="name" />
     <fieldset>
       <legend>Quiz Subject:</legend>
-
       <input
         type="radio"
         name="language"
         id="html"
         value="html"
         v-model="currentSubject"
-        @change="checkStyle($event)"
       />
-      <label for="html"> HTML </label>
+      <label
+        :class="{ active: currentSubject == 'html' ? 'active' : '' }"
+        for="html"
+      >
+        HTML
+      </label>
       <input
         type="radio"
         name="language"
         id="css"
         value="css"
         v-model="currentSubject"
-        @change="checkStyle($event)"
       />
-      <label for="css"> CSS </label>
+      <label
+        :class="{ active: currentSubject == 'css' ? 'active' : '' }"
+        for="css"
+      >
+        CSS
+      </label>
       <input
         type="radio"
         name="language"
         id="js"
         value="js"
         v-model="currentSubject"
-        @change="checkStyle($event)"
       />
-      <label for="js"> Javascript </label>
+      <label
+        :class="{ active: currentSubject == 'js' ? 'active' : '' }"
+        for="js"
+      >
+        Javascript
+      </label>
     </fieldset>
   </form>
 </template>
@@ -48,27 +59,6 @@ export default {
     return {
       currentSubject: "",
     };
-  },
-  methods: {
-    checkStyle(event) {
-      // set active radio to data propery
-      this.currentSubject = event.srcElement._value;
-
-      // find clicked label by for attribute value
-      var labelName = document.querySelector(
-        `label[for='${this.currentSubject}'`
-      );
-      // define all other labels and set their class to no-active
-      const element = document.querySelectorAll("label");
-      for (const item of element) {
-        item.classList.remove("active");
-      }
-
-      // set clicked label class to active
-      if (labelName.getAttribute("for") == this.currentSubject) {
-        labelName.classList.add("active");
-      }
-    },
   },
 };
 </script>
