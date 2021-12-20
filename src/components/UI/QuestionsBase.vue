@@ -73,7 +73,7 @@ export default {
       if (this.name == null || this.name == "") {
         this.error = "please enter you'r name";
       } else {
-        this.error = false;
+        this.error = "";
         fetch(
           `https://quizz-fdf90-default-rtdb.europe-west1.firebasedatabase.app/scores.json`,
           {
@@ -133,9 +133,9 @@ button[type="submit"] {
   height: 35px;
   margin: 0 30px;
   background-color: transparent;
-  border: 1px solid #ccc;
-  color: #777;
-  font: 400 13px "Montserrat";
+  border: 1px solid #9d9d9d;
+  color: #9d9d9d;
+  font: 500 13px "Montserrat";
   cursor: pointer;
   border-radius: 0.2rem;
   position: relative;

@@ -107,16 +107,22 @@
   <card-base>
     <questions-base :subject="currentSubject" :name="name"></questions-base>
   </card-base>
+
+  <card-base>
+    <submitted-answers></submitted-answers>
+  </card-base>
 </template>
 
 <script>
 import CardBase from "./BaseCard.vue";
 import QuestionsBase from "../UI/QuestionsBase.vue";
+import SubmittedAnswers from "../UI/SubmittedAnswers.vue";
 
 export default {
   components: {
     QuestionsBase,
     CardBase,
+    SubmittedAnswers,
   },
   data() {
     return {
