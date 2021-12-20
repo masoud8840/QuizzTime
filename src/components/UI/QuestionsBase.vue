@@ -46,7 +46,7 @@ export default {
         switch (this.subject) {
           case "html": {
             if (this.values[index] == this.HTMLAnswers[index]) {
-              this.scroes[0]++;
+              this.scores[0]++;
             } else {
               console.log("Nothing earned");
             }
@@ -54,7 +54,7 @@ export default {
           }
           case "css": {
             if (this.values[index] == this.CSSAnswers[index]) {
-              this.scroes[1]++;
+              this.scores[1]++;
             } else {
               console.log("Nothing earned");
             }
@@ -65,15 +65,19 @@ export default {
           }
         }
       }
-      this.scroes[0] = 0;
-      this.scroes[1] = 0;
-      this.scroes[2] = 0;
+      console.log(
+        "your html score",
+        this.scores[0] + " css score" + this.scores[1]
+      );
+      this.scores[0] = 0;
+      this.scores[1] = 0;
+      this.scores[2] = 0;
     },
   },
   data() {
     return {
       values: [],
-      scroes: [0, 0],
+      scores: [0, 0],
       HTMLQuestions: HTMLQuestions,
       HTMLAnswers: HTMLAnswers,
       CSSQuestions: CSSQuestions,
@@ -95,6 +99,6 @@ ol {
 }
 .coming-soon {
   font: 400 15px "Montserrat";
-  margin: 20px
+  margin: 20px;
 }
 </style>
