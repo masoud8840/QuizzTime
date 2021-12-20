@@ -1,23 +1,17 @@
 <template>
   <the-header></the-header>
-  <base-card>
-    <the-body></the-body>
-  </base-card>
+  <the-body></the-body>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheBody from "./components/layout/TheBody.vue";
 
-import BaseCard from "./components/layout/BaseCard.vue";
-
 export default {
   name: "App",
   components: {
     TheHeader,
     TheBody,
-
-    BaseCard,
   },
 };
 </script>

@@ -1,63 +1,74 @@
 <template>
-  <h2 class="section-title">
-    see how much you know about your favorite languages!
-  </h2>
+  <card-base>
+    <h2 class="section-title">
+      see how much you know about your favorite languages!
+    </h2>
 
-  <!-- Information form -->
-  <form autocomplete="off">
-    <h4 class="input-title">Your Name:</h4>
-    <input type="text" name="name" id="name" />
-    <fieldset>
-      <legend>Quiz Subject:</legend>
-      <input
-        type="radio"
-        name="language"
-        id="html"
-        value="html"
-        v-model="currentSubject"
-      />
-      <label
-        :class="{ active: currentSubject == 'html' ? 'active' : '' }"
-        for="html"
-      >
-        HTML
-      </label>
-      <input
-        type="radio"
-        name="language"
-        id="css"
-        value="css"
-        v-model="currentSubject"
-      />
-      <label
-        :class="{ active: currentSubject == 'css' ? 'active' : '' }"
-        for="css"
-      >
-        CSS
-      </label>
-      <input
-        type="radio"
-        name="language"
-        id="js"
-        value="js"
-        v-model="currentSubject"
-      />
-      <label
-        :class="{ active: currentSubject == 'js' ? 'active' : '' }"
-        for="js"
-      >
-        Javascript
-      </label>
-    </fieldset>
-  </form>
+    <!-- Information form -->
+    <form autocomplete="off">
+      <h4 class="input-title">Your Name:</h4>
+      <input type="text" name="name" id="name" />
+      <fieldset>
+        <legend>Quiz Subject:</legend>
+        <input
+          type="radio"
+          name="language"
+          id="html"
+          value="html"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'html' ? 'active' : '' }"
+          for="html"
+        >
+          HTML
+        </label>
+        <input
+          type="radio"
+          name="language"
+          id="css"
+          value="css"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'css' ? 'active' : '' }"
+          for="css"
+        >
+          CSS
+        </label>
+        <input
+          type="radio"
+          name="language"
+          id="js"
+          value="js"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'js' ? 'active' : '' }"
+          for="js"
+        >
+          Javascript
+        </label>
+      </fieldset>
+    </form>
+  </card-base>
+  <card-base>
+    <questions-base :subject="currentSubject"></questions-base>
+  </card-base>
 </template>
 
 <script>
+import CardBase from "./BaseCard.vue";
+import QuestionsBase from "../UI/QuestionsBase.vue";
+
 export default {
-  components: {},
+  components: {
+    QuestionsBase,
+    CardBase,
+  },
   data() {
     return {
-      currentSubject: "",
+      currentSubject: "html",
     };
   },
 };
@@ -76,13 +87,12 @@ form {
   }
   input[type="text"] {
     width: 220px;
-    height: 30px;
+    height: 37px;
     outline: 0;
     border: 1px solid #ccc;
     border-radius: 0.2rem;
     padding: 0 5px;
-    color: #777;
-    font: 500 13px "Montserrat";
+    font: 500 15px "Montserrat";
   }
   fieldset {
     padding: 20px;
@@ -100,11 +110,13 @@ form {
     input[type="radio"] {
       outline: 0;
       margin-left: 25px;
+      cursor: pointer;
     }
     label {
       font: 400 15px "Montserrat";
       padding-left: 5px;
       color: #777;
+      cursor: pointer;
     }
     .active {
       color: #000;
