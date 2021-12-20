@@ -20,10 +20,18 @@
         v-model="values[question.index]"
       ></question-item>
     </ol>
-    <p class="coming-soon" v-if="subject == 'js'">Coming Soon...</p>
-    <button v-if="subject != 'js'" @click="submitForm" type="submit">
-      submit
-    </button>
+
+    <p class="error-text" v-if="error != ''">
+      Something went wrong! {{ error }}
+    </p>
+    <button
+      v-if="subject == 'html' || subject == 'css'"
+      @click="submitForm"
+      type="submit"
+    ></button>
+    <p class="coming-soon" v-if="subject != 'html' && subject != 'css'">
+      Coming Soon...
+    </p>
   </form>
 </template>
 
@@ -36,7 +44,7 @@ import CSSQuestions from "../composition/cssQ.js";
 import CSSAnswers from "../composition/cssA.js";
 
 export default {
-  props: ["subject"],
+  props: ["name", "subject"],
   components: {
     QuestionItem,
   },
@@ -46,17 +54,13 @@ export default {
         switch (this.subject) {
           case "html": {
             if (this.values[index] == this.HTMLAnswers[index]) {
-              this.scores[0]++;
-            } else {
-              console.log("Nothing earned");
+              this.HTMLScore++;
             }
             break;
           }
           case "css": {
             if (this.values[index] == this.CSSAnswers[index]) {
-              this.scores[1]++;
-            } else {
-              console.log("Nothing earned");
+              this.CSSScore++;
             }
             break;
           }
@@ -65,19 +69,42 @@ export default {
           }
         }
       }
-      console.log(
-        "your html score",
-        this.scores[0] + " css score" + this.scores[1]
-      );
-      this.scores[0] = 0;
-      this.scores[1] = 0;
-      this.scores[2] = 0;
+      // validate name input and fetch
+      if (this.name == null || this.name == "") {
+        this.error = "please enter you'r name";
+      } else {
+        this.error = false;
+        fetch(
+          `https://quizz-fdf90-default-rtdb.europe-west1.firebasedatabase.app/scores.json`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: this.name,
+              subject: this.subject,
+              score:
+                this.subject == "html"
+                  ? this.HTMLScore
+                  : this.subject == "css"
+                  ? this.CSSScore
+                  : "",
+            }),
+          }
+        );
+      }
+      this.HTMLScore = 0;
+      this.CSSScore = 0;
+      console.log(this.name);
     },
   },
   data() {
     return {
+      error: "",
       values: [],
-      scores: [0, 0],
+      HTMLScore: 0,
+      CSSScore: 0,
       HTMLQuestions: HTMLQuestions,
       HTMLAnswers: HTMLAnswers,
       CSSQuestions: CSSQuestions,
@@ -100,5 +127,53 @@ ol {
 .coming-soon {
   font: 400 15px "Montserrat";
   margin: 20px;
+}
+button[type="submit"] {
+  width: 120px;
+  height: 35px;
+  margin: 0 30px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #777;
+  font: 400 13px "Montserrat";
+  cursor: pointer;
+  border-radius: 0.2rem;
+  position: relative;
+  overflow: hidden;
+  outline: 0;
+  transition: all 0.3s;
+  &::after {
+    content: "Submit";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s;
+  }
+  &::before {
+    content: "Submit";
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s;
+  }
+  &:hover {
+    color: #000;
+    border: 1px solid #000;
+    &::after {
+      top: 150%;
+      transform: translate(-50%, 0);
+    }
+    &::before {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+.error-text {
+  margin: 30px;
+  color: #dd4a48;
+  font: 500 15px "Montserrat";
 }
 </style>

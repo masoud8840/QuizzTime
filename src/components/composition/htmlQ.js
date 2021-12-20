@@ -1,20 +1,10 @@
 const HTMLQuestions = [
   {
-    questionTitle:
-      "Inline elements are normally displayed without starting a new line.",
+    questionTitle: "What does HTML stand for?",
     questionOptions: [
       {
-        text: "True",
+        text: "Home Tool Markup Language",
       },
-      {
-        text: "False",
-      },
-    ],
-    index: 0,
-  },
-  {
-    questionTitle: "What is the correct HTML for inserting an image?",
-    questionOptions: [
       {
         text: "Hyperlinks and Text Markup Language",
       },
@@ -24,8 +14,18 @@ const HTMLQuestions = [
       {
         text: "Hyper Text Makeup Language",
       },
+    ],
+    index: 0,
+  },
+  {
+    questionTitle:
+      "Inline elements are normally displayed without starting a new line.",
+    questionOptions: [
       {
-        text: "Home Tool Markup Language",
+        text: "True",
+      },
+      {
+        text: "False",
       },
     ],
     index: 1,
@@ -235,7 +235,7 @@ const HTMLQuestions = [
     questionTitle: "Which doctype is correct for HTML5?",
     questionOptions: [
       {
-        text: "<!DOCTYPE html> ",
+        text: "<!DOCTYPE html>",
       },
       {
         text: "<!DOCTYPE HTML5>",

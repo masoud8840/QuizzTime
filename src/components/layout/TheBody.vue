@@ -7,7 +7,7 @@
     <!-- Information form -->
     <form autocomplete="off">
       <h4 class="input-title">Your Name:</h4>
-      <input type="text" name="name" id="name" />
+      <input v-model.trim="name" type="text" name="name" id="name" />
       <fieldset>
         <legend>Quiz Subject:</legend>
         <input
@@ -49,11 +49,63 @@
         >
           Javascript
         </label>
+        <input
+          type="radio"
+          name="language"
+          id="vue"
+          value="vue"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'vue' ? 'active' : '' }"
+          for="vue"
+        >
+          Vue.js
+        </label>
+        <input
+          type="radio"
+          name="language"
+          id="react"
+          value="react"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'react' ? 'active' : '' }"
+          for="react"
+        >
+          React.js
+        </label>
+        <input
+          type="radio"
+          name="language"
+          id="angular"
+          value="angular"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'angular' ? 'active' : '' }"
+          for="angular"
+        >
+          Angular.js
+        </label>
+        <input
+          type="radio"
+          name="language"
+          id="node"
+          value="node"
+          v-model="currentSubject"
+        />
+        <label
+          :class="{ active: currentSubject == 'node' ? 'active' : '' }"
+          for="node"
+        >
+          Node.js
+        </label>
       </fieldset>
     </form>
   </card-base>
   <card-base>
-    <questions-base :subject="currentSubject"></questions-base>
+    <questions-base :subject="currentSubject" :name="name"></questions-base>
   </card-base>
 </template>
 
@@ -68,6 +120,7 @@ export default {
   },
   data() {
     return {
+      name: "",
       currentSubject: "html",
     };
   },
