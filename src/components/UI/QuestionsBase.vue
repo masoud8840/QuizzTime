@@ -111,6 +111,11 @@ export default {
       CSSAnswers: CSSAnswers,
     };
   },
+  watch: {
+    subject() {
+      this.error = "";
+    },
+  },
 };
 </script>
 
